@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/benjakuben/Development/WorkshopWeather/app/build/intermediates/pre-dexed/debug/gson-2.2.4-e0d79453ef8f6e36efeb03a93fb07a55161d7ec5.jar"
+        jar="/Users/benjakuben/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568"/>
+    <item
+        dex="/Users/benjakuben/Development/WorkshopWeather/app/build/intermediates/pre-dexed/debug/retrofit-1.6.0-0a33ecc07d71b75bf44a51ae572a98fd1e826447.jar"
+        jar="/Users/benjakuben/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.6.0/39a9e4b49ded46aa1b67d492fe287c4cebcd815c/retrofit-1.6.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="39a9e4b49ded46aa1b67d492fe287c4cebcd815c"/>
+
+</pre-dex-items>
