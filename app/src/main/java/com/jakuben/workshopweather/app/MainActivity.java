@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.jakuben.workshopweather.adapters.DailyForecastAdapter;
 import com.jakuben.workshopweather.models.Forecast;
 import com.jakuben.workshopweather.services.ForecastServiceClient;
@@ -40,6 +42,8 @@ public class MainActivity extends ListActivity {
 
         // Get weather data
         ForecastServiceClient.getInstance().getForecastData(mLatitude, mLongitude, mForecastCallback);
+
+        trackScreenView();
     }
 
     @Override
@@ -133,5 +137,17 @@ public class MainActivity extends ListActivity {
         translation2.setDuration(500);
         translation2.setStartOffset(200);
         mCurrentTempLabel.startAnimation(translation2);
+    }
+
+    private void trackScreenView() {
+        // Get tracker.
+        Tracker t = ((WorkshopApplication)getApplication()).getTracker(WorkshopApplication.TrackerName.APP_TRACKER);
+
+        // Set screen name.
+        // Where path is a String representing the screen name.
+        t.setScreenName(MainActivity.class.getSimpleName());
+
+        // Send a screen view.
+        t.send(new HitBuilders.AppViewBuilder().build());
     }
 }
