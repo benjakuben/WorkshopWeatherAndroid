@@ -1,6 +1,7 @@
 package com.jakuben.workshopweather.adapters;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,10 @@ public class DailyForecastAdapter extends ArrayAdapter<Data> {
         holder.highLowLabel.setText(Math.round(dayData.getTemperatureMax().doubleValue()) + " / " +
                 Math.round(dayData.getTemperatureMin().doubleValue()));
 
-        // TODO: Get the device width here
-        Animation translation = new TranslateAnimation(1280, 0, 0, 0);
+        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+        float deviceWidth = displayMetrics.widthPixels;
+
+        Animation translation = new TranslateAnimation(deviceWidth, 0, 0, 0);
         translation.setDuration(500);
         translation.setStartOffset(100 * position);
         holder.container.startAnimation(translation);
