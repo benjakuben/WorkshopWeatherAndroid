@@ -15,6 +15,8 @@ import com.jakuben.workshopweather.adapters.DailyForecastAdapter;
 import com.jakuben.workshopweather.models.Forecast;
 import com.jakuben.workshopweather.services.ForecastServiceClient;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -27,19 +29,16 @@ public class MainActivity extends ListActivity {
     private double mLatitude = 36.099869;
     private double mLongitude = -115.171347;
 
-    protected TextView mCurrentTempLabel;
-    protected ImageView mCurrentWeatherImage;
+    @InjectView(R.id.textView) protected TextView mCurrentTempLabel;
+    @InjectView(R.id.imageView) protected ImageView mCurrentWeatherImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
 
-        // Set views
-        mCurrentTempLabel = (TextView)findViewById(R.id.textView);
-        mCurrentWeatherImage = (ImageView)findViewById(R.id.imageView);
-
-        // Get data
+        // Get weather data
         ForecastServiceClient.getInstance().getForecastData(mLatitude, mLongitude, mForecastCallback);
     }
 
@@ -68,6 +67,7 @@ public class MainActivity extends ListActivity {
             Log.i(TAG, "Current temp: " + forecast.getCurrently().getTemperature());
             mCurrentTempLabel.setText(forecast.getCurrently().getTemperature().toString() + "\u00b0");
             mCurrentWeatherImage.setImageResource(getIconId(forecast.getCurrently().getIcon()));
+
             animateCurrentConditions();
 
             DailyForecastAdapter adapter = new DailyForecastAdapter(MainActivity.this, forecast.getDaily().getData());

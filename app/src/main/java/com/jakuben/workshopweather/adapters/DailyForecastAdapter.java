@@ -16,6 +16,9 @@ import com.jakuben.workshopweather.models.Data;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by benjakuben on 6/9/14.
  */
@@ -51,11 +54,7 @@ public class DailyForecastAdapter extends ArrayAdapter<Data> {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.daily_forecast_item, null);
-            holder = new ViewHolder();
-            holder.container = (ViewGroup)convertView.findViewById(R.id.dailyForecastContainer);
-            holder.dayNameLabel = (TextView)convertView.findViewById(R.id.day);
-            holder.summaryLabel = (TextView)convertView.findViewById(R.id.summary);
-            holder.highLowLabel = (TextView)convertView.findViewById(R.id.temperatures);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
         else {
@@ -105,10 +104,14 @@ public class DailyForecastAdapter extends ArrayAdapter<Data> {
         return "";
     }
 
-    private static class ViewHolder {
-        ViewGroup container;
-        TextView dayNameLabel;
-        TextView summaryLabel;
-        TextView highLowLabel;
+    static class ViewHolder {
+        @InjectView(R.id.dailyForecastContainer) ViewGroup container;
+        @InjectView(R.id.day) TextView dayNameLabel;
+        @InjectView(R.id.summary) TextView summaryLabel;
+        @InjectView(R.id.temperatures) TextView highLowLabel;
+
+        public ViewHolder(View view) {
+            ButterKnife.inject(this, view);
+        }
     }
 }
