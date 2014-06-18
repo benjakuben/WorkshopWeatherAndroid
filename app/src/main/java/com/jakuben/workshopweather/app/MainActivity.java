@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.jakuben.workshopweather.adapters.DailyForecastAdapter;
@@ -37,6 +38,8 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
+
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
@@ -44,6 +47,8 @@ public class MainActivity extends ListActivity {
         ForecastServiceClient.getInstance().getForecastData(mLatitude, mLongitude, mForecastCallback);
 
         trackScreenView();
+
+//        throw new RuntimeException("This is a crash");
     }
 
     @Override
