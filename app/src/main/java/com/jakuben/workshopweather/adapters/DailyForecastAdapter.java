@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -49,6 +51,7 @@ public class DailyForecastAdapter extends ArrayAdapter<Data> {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.daily_forecast_item, null);
             holder = new ViewHolder();
+            holder.container = (ViewGroup)convertView.findViewById(R.id.dailyForecastContainer);
             holder.dayNameLabel = (TextView)convertView.findViewById(R.id.day);
             holder.summaryLabel = (TextView)convertView.findViewById(R.id.summary);
             holder.highLowLabel = (TextView)convertView.findViewById(R.id.temperatures);
@@ -65,6 +68,12 @@ public class DailyForecastAdapter extends ArrayAdapter<Data> {
         holder.summaryLabel.setText(dayData.getSummary());
         holder.highLowLabel.setText(Math.round(dayData.getTemperatureMax().doubleValue()) + " / " +
                 Math.round(dayData.getTemperatureMin().doubleValue()));
+
+        // TODO: Get the device width here
+        Animation translation = new TranslateAnimation(1280, 0, 0, 0);
+        translation.setDuration(500);
+        translation.setStartOffset(100 * position);
+        holder.container.startAnimation(translation);
 
         return convertView;
     }
@@ -94,6 +103,7 @@ public class DailyForecastAdapter extends ArrayAdapter<Data> {
     }
 
     private static class ViewHolder {
+        ViewGroup container;
         TextView dayNameLabel;
         TextView summaryLabel;
         TextView highLowLabel;
